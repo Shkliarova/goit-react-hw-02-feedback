@@ -16,6 +16,3 @@ export const FeedbackBtn = styled.div`
 display: flex;
 gap: 8px;
 justify-content: center;`
-
-export const FeedbackTitle = styled.h2`
-text-align: center;`

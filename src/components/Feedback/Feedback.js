@@ -1,8 +1,12 @@
-import { FeedbackWrapper, FeedbackBtn, FeedbackTitle } from "./Feedback.styled";
+import { FeedbackWrapper, FeedbackBtn } from "./Feedback.styled";
+import { Statistics } from "../Statistic/Statistic";
+import { FeedbackOptions } from "../FeedbackOptions/FeedbackOptions";
+import { Section } from "../Section/Section";
+import { Notification } from "../Notification/Notification";
 
 const { Component } = require("react");
 
-const Button = ({onUpdate, value}) => {
+export const Button = ({onUpdate, value}) => {
     return <button onClick={onUpdate}>{value}</button>
 }
 
@@ -56,19 +60,19 @@ export class Feedback extends Component {
 
         return(
             <FeedbackWrapper>
-                <FeedbackTitle>Please leave feedback</FeedbackTitle>
+                <Section title = "Please leave feedback">
                 <FeedbackBtn>
-                    <Button value="good" onUpdate={this.updateGood}/>
-                    <Button value="neutral" onUpdate={this.updateNeutral}/>
-                    <Button value="bad" onUpdate={this.updateBad}/>
+                    <FeedbackOptions options="good" onLeaveFeedback={this.updateGood} />
+                    <FeedbackOptions options="neutral" onLeaveFeedback={this.updateNeutral} />
+                    <FeedbackOptions options="bad" onLeaveFeedback={this.updateBad} />
                 </FeedbackBtn>
-
-                <FeedbackTitle>Statistics</FeedbackTitle>
-                <p>Good: {good}</p>
-                <p>Neutral: {neutral}</p>
-                <p>Bad: {bad}</p>
-                <p>Total: {total}</p>
-                <p>Positive feedback: {positive}%</p>
+                </Section>
+                
+                <Section title = "Statistics">
+                    {total > 0 ? 
+                    <Statistics good={good} neutral={neutral} bad={bad} total={total} positive={positive} /> :
+                    <Notification message = "There is no feedback..."/>}
+                </Section>
             </FeedbackWrapper>
         )
     }
