@@ -14,5 +14,5 @@ margin: 0 auto;`
 
 export const FeedbackBtn = styled.div`
 display: flex;
-gap: 8px;
-justify-content: center;`
+justify-content: center;
+margin-top: 8px;`

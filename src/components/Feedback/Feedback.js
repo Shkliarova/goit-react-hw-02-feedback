@@ -1,10 +1,10 @@
-import { FeedbackWrapper, FeedbackBtn } from "./Feedback.styled";
+import { FeedbackWrapper} from "./Feedback.styled";
 import { Statistics } from "../Statistic/Statistic";
-import { FeedbackOptions } from "../FeedbackOptions/FeedbackOptions";
 import { Section } from "../Section/Section";
 import { Notification } from "../Notification/Notification";
+import { FeedbackOptions } from "components/FeedbackOptions/FeedbackOptions";
 
-const { Component } = require("react");
+import { Component } from "react";
 
 export const Button = ({onUpdate, value}) => {
     return <button onClick={onUpdate}>{value}</button>
@@ -17,26 +17,10 @@ export class Feedback extends Component {
         bad: 0
     }
 
-    updateGood = () => {
+    onLeaveFeedback = (name) => {
         this.setState(prevState => {
             return{
-                good: prevState.good + 1,
-            }
-        })
-    }
-
-    updateNeutral = () => {
-        this.setState(prevState => {
-            return{
-                neutral: prevState.neutral + 1,
-            }
-        })
-    }
-
-    updateBad = () => {
-        this.setState(prevState => {
-            return{
-                bad: prevState.bad + 1,
+                [name]: prevState[name] + 1,
             }
         })
     }
@@ -61,11 +45,7 @@ export class Feedback extends Component {
         return(
             <FeedbackWrapper>
                 <Section title = "Please leave feedback">
-                <FeedbackBtn>
-                    <FeedbackOptions options="good" onLeaveFeedback={this.updateGood} />
-                    <FeedbackOptions options="neutral" onLeaveFeedback={this.updateNeutral} />
-                    <FeedbackOptions options="bad" onLeaveFeedback={this.updateBad} />
-                </FeedbackBtn>
+                <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedback={this.onLeaveFeedback}/>
                 </Section>
                 
                 <Section title = "Statistics">

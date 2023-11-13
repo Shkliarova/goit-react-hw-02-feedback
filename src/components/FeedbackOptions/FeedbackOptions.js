@@ -1,9 +1,17 @@
-import { Button } from "../Feedback/Feedback"
+import { FeedbackBtn } from "components/Feedback/Feedback.styled"
+import { Button } from "components/Feedback/Feedback"
 
 export const FeedbackOptions = ({onLeaveFeedback, options}) => {
     return(
         <div>
-        <Button value={options} onUpdate={onLeaveFeedback} />
+            {options.map(name => {
+                return(
+                    <FeedbackBtn key={name}>
+                        <Button value={name} onUpdate={()=>onLeaveFeedback(name)} />
+                    </FeedbackBtn>
+                )
+            }
+            )}
         </div>
     )
 }
